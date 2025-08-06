@@ -1,0 +1,17 @@
+# From your workspace root:
+# Add .gitignore to Expo template
+@"
+node_modules/
+.expo/
+android/
+ios/
+.env
+"@ | Out-File .\expo-bare-template\.gitignore -Encoding UTF8
+
+# Add .gitignore to Next.js template
+@"
+node_modules/
+.next/
+out/
+.env
+"@ | Out-File .\next-js-template\.gitignore -Encoding UTF8
