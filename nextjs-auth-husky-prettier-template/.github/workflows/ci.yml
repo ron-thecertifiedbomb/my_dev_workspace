@@ -1,21 +1,38 @@
+# .github/workflows/ci.yml
+# .github/workflows/ci.yml
 name: CI
 
 on:
   push:
     branches: [dev]
+  pull_request:
+    branches: [dev]
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run type-check
+      - name: Install Dependencies (with postinstall scripts)
+        run: yarn install --immutable
+
+      - name: Run Lint
+        run: yarn lint
+
+      - name: Run Type Check
+        run: yarn type-check
+
+      - name: Run Tests
+        run: yarn test
+
+      - name: Build Project
+        run: yarn build

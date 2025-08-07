@@ -9,8 +9,6 @@ export default function Home() {
 
   const goToDashboard = () => {
 
-
-
     if (role) router.push(`/${role}`);
     else router.push('/login');
   };
